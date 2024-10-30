@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,6 +15,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+        factory(User::class, 50)->create();
+
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => 'target-user@ecmm463.edu',
+            'password' => 'Password1',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => Str::random(10),
+            'email' => 'attacker-user@ecmm463.edu',
+            'password' => 'Password1',
+        ]);
     }
 }
