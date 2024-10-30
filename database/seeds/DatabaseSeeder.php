@@ -17,16 +17,16 @@ class DatabaseSeeder extends Seeder
     {
         factory(User::class, 50)->create();
 
-        DB::table('users')->insert([
+        User::create([
             'name' => Str::random(10),
             'email' => 'target-user@ecmm463.edu',
-            'password' => 'Password1',
-        ]);
+            'password' => Hash::make('Password1'),
+        ])->markEmailAsVerified();
 
-        DB::table('users')->insert([
+        User::create([
             'name' => Str::random(10),
             'email' => 'attacker-user@ecmm463.edu',
-            'password' => 'Password1',
-        ]);
+            'password' => Hash::make('Password1'),
+        ])->markEmailAsVerified();
     }
 }
